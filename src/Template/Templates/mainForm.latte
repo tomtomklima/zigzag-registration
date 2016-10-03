@@ -1,0 +1,16 @@
+{extends "layout.latte"}
+
+{define headline}
+	{$nameOfEvent}
+
+{/define}
+
+{define content}
+	{foreach $categories as $category}
+		{$category['name']}
+		{$category['description']}
+		{foreach $category['options'] as $option}
+			{$option}
+		{/foreach}
+	{/foreach}
+{/define}

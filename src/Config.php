@@ -17,5 +17,5 @@ const PROD_USERNAME = '';
 const PROD_PASSWORD = '';
 const PROD_DATABASE_NAME = '';
 
-const ROOT = "";
-const ROUTER_URI = "";
+const ROUTER_URI = "/zigzag-registration";
+const ROOT = "https://localhost".ROUTER_URI;
