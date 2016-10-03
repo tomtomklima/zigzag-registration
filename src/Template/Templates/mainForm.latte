@@ -2,7 +2,6 @@
 
 {define headline}
 	{$nameOfEvent}
-
 {/define}
 
 {define content}
@@ -10,7 +9,7 @@
 		{$category['name']}
 		{$category['description']}
 		{foreach $category['options'] as $option}
-			{$option}
+			{$option['name']} - {$option['info']}
 		{/foreach}
 	{/foreach}
 {/define}
