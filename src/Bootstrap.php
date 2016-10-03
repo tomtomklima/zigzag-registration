@@ -1,16 +1,17 @@
 <?php
 
 namespace Zigzag;
+
 use Dibi\Connection;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Http\HttpRequest;
 use Http\HttpResponse;
 use Plasticbrain\FlashMessages\FlashMessages;
-use Zigzag\Logging;
-use Zigzag\Template\LatteRenderer;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
+use Zigzag\Logging\Monolog;
+use Zigzag\Template\LatteRenderer;
 
 //include config
 require_once 'Config.php';
@@ -20,7 +21,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 
 //LOGGING
-$logger = new Logging\ Monolog('accessLogger', 'errorLogger');
+$logger = new Monolog('accessLogger', 'errorLogger');
 
 
 //ERROR HANDLING
@@ -38,7 +39,6 @@ else {
 	});
 }
 $whoops->register();
-//throw new \Exception; //example
 
 
 //HTTP REQUEST & RESPONSES
@@ -69,35 +69,12 @@ else {
 }
 $database = new Connection($options);
 
-
-//AUTHORIZATION - ROLE BASED ACCESS CONTROLL - http://phprbac.net/
-//db config at vendor/owasp/phprbac/PhpRbac/database/database.config
-$authorization = new RbacPermisions();
-
-//initialize with base data if empty permissions
-try {
-	$authorization->checkPermission(0, 'access');
-} catch (\RbacException $e) {
-	$authorization->initializeUsersWitRoles();
-}
-
-
-//AUTHENTICATION
-session_start();
-if (isset($_SESSION['userId'], $_SESSION['loginString'], $_SESSION['userName']))
-	$user = new User($_SESSION['userId'], $_SESSION['loginString'], $_SESSION['userName'], $authorization);
-else
-	$user = new User(null, null, null, $authorization);
-
-//TODO add CSRF protection
-//https://github.com/volnix/csrf
-
+session_start();    
 
 //TEMPLATING
 //flash messages from https://github.com/plasticbrain/PhpFlashMessages
 $flashMessages = new FlashMessages();
-$menuRenderer = new ArrayMenuReader($user, ROOT);
-$renderer = new LatteRenderer($menuRenderer, ROOT, $flashMessages, $request);
+$renderer = new LatteRenderer(ROOT, $flashMessages, $request);
 
 
 //ROUTER
@@ -130,12 +107,9 @@ switch ($routeInfo[0]) {
 		$vars = [];
 		break;
 }
-$class = new $className($request, $response, $renderer, $database, $user, ROOT, $flashMessages);
+$class = new $className($request, $response, $renderer, $database, ROOT, $flashMessages);
 //rock magic!
 $class->$method($vars);
-
-//log action
-$logger->logUsage($user->getUsername(), $className, $method, $vars, $database);
 
 //render
 foreach ($response->getHeaders() as $header) {

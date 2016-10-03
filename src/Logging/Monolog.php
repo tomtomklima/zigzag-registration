@@ -2,7 +2,6 @@
 
 namespace Zigzag\Logging;
 
-use Monolog\Handler\NativeMailerHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 

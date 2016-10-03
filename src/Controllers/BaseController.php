@@ -33,11 +33,7 @@ class BaseController {
 			return [$year - 1, 12];
 		}
 		else {
-			throw new UnexpectedValueException('Vloženo neplatné číslo měsíce');
+			throw new \UnexpectedValueException('Vloženo neplatné číslo měsíce');
 		}
-	}
-	
-	protected function accessRejected() {
-		throw new \RbacException ('Přístup odepřen', 403);
 	}
 }

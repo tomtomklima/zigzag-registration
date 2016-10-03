@@ -12,9 +12,9 @@ class ComposerStaticInitf58edce0692599198e8c288e5e481bcb
     );
 
     public static $prefixLengthsPsr4 = array (
-        'z' => 
+        'Z' => 
         array (
-            'zigzag\\' => 7,
+            'Zigzag\\' => 7,
         ),
         'P' => 
         array (
@@ -36,7 +36,7 @@ class ComposerStaticInitf58edce0692599198e8c288e5e481bcb
     );
 
     public static $prefixDirsPsr4 = array (
-        'zigzag\\' => 
+        'Zigzag\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
