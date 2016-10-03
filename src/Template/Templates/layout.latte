@@ -8,9 +8,14 @@
 	<link rel="stylesheet" href="{$ROOT}public/style.css">
 </head>
 <body>
-
-Já jsem pusinka!
-
+	{$nameOfEvent}
+	{foreach $categories as $category}
+		{$category['name']}
+		{$category['description']}
+		{foreach $category['options'] as $option}
+			{$option}
+		{/foreach}
+	{/foreach}
 </body>
 </html>
 
