@@ -86,6 +86,7 @@ $routeDefinitionCallback = function(RouteCollector $r) {
 };
 
 $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
+$uri = rtrim($request->getUri());
 $routeInfo = $dispatcher->dispatch($request->getMethod(), rtrim($request->getUri(), '/'));
 switch ($routeInfo[0]) {
 	case Dispatcher::FOUND:
