@@ -8,8 +8,9 @@
 	<p>{$eventDescription}</p>
 	{foreach $categories as $category}
 		<p>
-		<b>{$category['categoryName']}</b>
-		{$category['categoryDescription']}
+		<h3 class="headline">{$category['categoryName']} 
+		<span class="blue">{$category['categoryDescription']} </span> </h3>
+		
 		{foreach $category['options'] as $option}
 			{$option['optionName']} - {$option['optionInfo']}
 		{/foreach}
