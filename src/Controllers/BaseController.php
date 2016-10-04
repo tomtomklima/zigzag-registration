@@ -25,7 +25,7 @@ class BaseController {
 		$this->flashMessages = $flashMessages;
 	}
 	
-	protected function getPreviousMonth($year, $month) {
+	public function getPreviousMonth($year, $month) {
 		if (12 >= $month && $month > 1) {
 			return [$year, $month - 1];
 		}
@@ -36,4 +36,21 @@ class BaseController {
 			throw new \UnexpectedValueException('Vloženo neplatné číslo měsíce');
 		}
 	}
+	
+	public function checkAdminAccess($validAccesses = []) {
+		$validUsers = array_keys($validAccesses);
+		
+		$user = @$_SERVER['PHP_AUTH_USER'];
+		$pass = @$_SERVER['PHP_AUTH_PW'];
+		
+		$validated = (in_array($user, $validUsers)) && ($pass == $validAccesses[$user]);
+		
+		if (!$validated) {
+			header('WWW-Authenticate: Basic realm="Zig-zag Form App"');
+			header('HTTP/1.0 401 Unauthorized');
+			die('Nesprávně zadané údaje pro přihlášení');
+		} else {
+			return true;
+		}
+	} 
 }
