@@ -20,4 +20,4 @@ const PROD_DATABASE_NAME = '';
 const ROUTER_URI = "/zigzag-registration";
 const ROOT = "http://localhost".ROUTER_URI;
 
-const USERS = ['kaca' => 'kaca', 'ondra' => 'ondra'];
+const USERS = ['kaca' => 'kaca', 'ondra' => 'ondra', 'terezka' => 'terezka'];
