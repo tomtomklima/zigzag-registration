@@ -12,7 +12,12 @@
 		<span class="blue">{$category['categoryDescription']} </span> </h3>
 		
 		{foreach $category['options'] as $option}
-			{$option['optionName']} - {$option['optionInfo']} <input type="radio" name="{$category['categoryName']}" value="{$option['optionName']}">
+			<input type="radio" name="{$category['categoryName']}" value="{$option['optionName']}">
+				{$option['optionName']} 
+				{ifset $option['optionInfo']}
+				 	- {$option['optionInfo']}  
+				{/ifset}
+				<br/>
 		{/foreach}
 		</p>
 	{/foreach}
