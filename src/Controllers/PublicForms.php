@@ -19,7 +19,6 @@ class PublicForms extends BaseController {
 	}
 	
 	public function mainForm() {
-		
 		$data = $this->forms->getDummyDataForMainForm();
 		
 		$html = $this->renderer->render('mainForm', $data);

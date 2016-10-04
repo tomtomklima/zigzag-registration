@@ -6,24 +6,23 @@
 
 {define content}
 	<p>{$eventDescription}</p>
-	<form>
-	{foreach $categories as $category}
-		<p>
-		<h3 class="header">{$category['categoryName']} 
-		<span class="blue">{$category['categoryDescription']} </span> </h3>
-		
-		{foreach $category['options'] as $option}
-			<input type="radio" name="{$category['categoryName']}" value="{$option['optionName']}">
-				{$option['optionName']} 
-				{ifset $option['optionInfo']}
-				 	- {$option['optionInfo']}  
-				{/ifset}
-				<br/>
+	<form class="pure-form-aligned">
+		{foreach $categories as $category}
+			<h3 class="header pure-control-group">{$category['categoryName']}
+				<span class="blue">{$category['categoryDescription']}</span></h3>
+			{foreach $category['options'] as $option}
+				<div class="pure-controls">
+					<input type="radio" id="{$option['optionId']}" name="{$category['categoryName']}"
+						   value="{$option['optionName']}">
+					<label for="{$option['optionId']}">{$option['optionName']}
+						{ifset $option['optionInfo']}
+							- {$option['optionInfo']}
+						{/ifset}
+					</label></div>
+			{/foreach}
 		{/foreach}
-		</p>
-	{/foreach}
-	<div class="button">
-        <button type="submit">Submit</button>
-    </div>
-    </form>
+		<div class="button pure-controls">
+			<input type="submit" value="Registrovat!">
+		</div>
+	</form>
 {/define}

@@ -5,8 +5,20 @@
 {/define}
 
 {define content}
-	<form>
-		<button>Přidej novou kategorii</button><br/>
-		<input type="submit" value="Vytvořit nový event">
+	<form class="pure-form pure-form-aligned">
+		<div class="pure-control-group">
+			<label for="eventName">Název akce:</label>
+			<input id="eventName" name="eventName" type="text">
+		</div>
+		<div class="pure-control-group">
+			<label for="eventDetail">Detail akce:</label>
+			<input id="eventDetail" name="eventDetail" type="text">
+		</div>
+		<div class="pure-control-group">
+			<button>Přidej novou kategorii</button>
+		</div>
+		<div class="pure-control-group">
+			<input type="submit" value="Vytvořit nový event">
+		</div>
 	</form>
 {/define}
